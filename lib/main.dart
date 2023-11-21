@@ -12,9 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
+      darkTheme: ThemeData.dark(useMaterial3: true),
       home: const CalcPage(),
     );
   }
