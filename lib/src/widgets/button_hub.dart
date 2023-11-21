@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
 
+// -> POO <-
+sealed class ButtonClick {
+  final String value;
+  const ButtonClick(this.value);
+}
+
+class CommonButtonClick extends ButtonClick {
+  const CommonButtonClick(super.value);
+}
+
+class EqualButtonClick extends ButtonClick {
+  const EqualButtonClick(super.value);
+}
+
+class ClearButtonClick extends ButtonClick {
+  const ClearButtonClick(super.value);
+}
+
+class ClearEntryButtonClick extends ButtonClick {
+  const ClearEntryButtonClick(super.value);
+}
+
 class ButtonHub extends StatelessWidget {
-  const ButtonHub({super.key});
+  final void Function(ButtonClick buttonClick) onButtonClick;
+  const ButtonHub({super.key, required this.onButtonClick});
 
   @override
   Widget build(BuildContext context) {
@@ -15,52 +38,91 @@ class ButtonHub extends StatelessWidget {
         Button(
           value: '%',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
         ),
         Button(
           value: 'CE',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(ClearEntryButtonClick(value)),
         ),
         Button(
           value: 'C',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(ClearButtonClick(value)),
         ),
         Button(
           value: '',
           color: Theme.of(context).colorScheme.primary,
         ),
-        const Button(value: '7'),
-        const Button(value: '8'),
-        const Button(value: '9'),
+        Button(
+          value: '7',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '8',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '9',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
         Button(
           value: '/',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
         ),
-        const Button(value: '4'),
-        const Button(value: '5'),
-        const Button(value: '6'),
         Button(
-          value: 'x',
-          color: Theme.of(context).colorScheme.onPrimary,
+          value: '4',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
         ),
-        const Button(value: '1'),
-        const Button(value: '2'),
-        const Button(value: '3'),
+        Button(
+          value: '5',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '6',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '*',
+          color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '1',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '2',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
+        Button(
+          value: '3',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
         Button(
           value: '+',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
         ),
         Button(
           value: '-',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
         ),
-        const Button(value: '0'),
+        Button(
+          value: '0',
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
+        ),
         Button(
           value: '.',
           color: Theme.of(context).colorScheme.onPrimary,
+          onTap: (value) => onButtonClick(CommonButtonClick(value)),
         ),
         Button(
           value: '=',
           color: Theme.of(context).colorScheme.onTertiary,
+          onTap: (value) => onButtonClick(EqualButtonClick(value)),
         ),
       ],
     );
@@ -77,15 +139,17 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = this.color ?? Theme.of(context).colorScheme.primaryContainer;
 
-    return InkWell(
-      onTap: onTap == null ? null : () => onTap!(value),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        color: color,
-        child: Center(
-          child: Text(
-            value,
-            style: Theme.of(context).textTheme.displaySmall,
+    return Material(
+      color: color,
+      child: InkWell(
+        onTap: onTap == null ? null : () => onTap!(value),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
           ),
         ),
       ),
